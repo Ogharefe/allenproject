@@ -1,0 +1,10 @@
+{
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-17",
+      "path": "C:\\Users\\okpee\\tools\\openlogic-openjdk-21.0.7+6",
+      "default": true
+    }
+  ],
+  "java.compile.nullAnalysis.mode": "automatic"
+}

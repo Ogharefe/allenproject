@@ -1,0 +1,163 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20250820-01-create-product-table
+      author: allen
+      changes:
+        - createTable:
+            tableName: product
+            columns:
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: price
+                  type: DOUBLE
+              - column:
+                  name: sku
+                  type: VARCHAR(255)
+
+  - changeSet:
+      id: 20250820-02-create-stock-table
+      author: allen
+      changes:
+        - createTable:
+            tableName: stock
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: warehouse_id
+                  type: BIGINT
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quantity_on_hand
+                  type: INT
+              - column:
+                  name: quantity_reserved
+                  type: INT
+              - column:
+                  name: last_updated
+                  type: DATE
+        - addForeignKeyConstraint:
+            baseTableName: stock
+            baseColumnNames: product_id
+            referencedTableName: product
+            referencedColumnNames: product_id
+            constraintName: fk_stock_product
+  - changeSet:
+      id: 20251026-01-add-quantity-change-to-stock
+      author: allen
+      changes:
+        - addColumn:
+            tableName: stock
+            columns:
+              - column:
+                  name: quantity_change
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 20250820-03-create-warehouse-table
+      author: allen
+      changes:
+        - createTable:
+            tableName: warehouse
+            columns:
+              - column:
+                  name: warehouse_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: location
+                  type: VARCHAR(255)
+              - column:
+                  name: manager_name
+                  type: VARCHAR(255)
+              - column:
+                  name: contact_info
+                  type: VARCHAR(255)
+              - column:
+                  name: product_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: warehouse
+            baseColumnNames: product_id
+            referencedTableName: product
+            referencedColumnNames: product_id
+            constraintName: fk_warehouse_product
+
+# New changeSet added to removed product_id column and foreign key constraint
+  - changeSet:
+      id: 20250821-01-drop-product-id-from-warehouse
+      author: allen
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: warehouse
+            constraintName: fk_warehouse_product
+        - dropColumn:
+            columnName: product_id
+            tableName: warehouse
+
+  - changeSet:
+      id: 20250821-01-create-stock-transaction-table
+      author: allen
+      changes:
+        - createTable:
+            tableName: stock_transaction
+            columns:
+              - column:
+                  name: stock_transaction_id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: product_id
+                  type: BIGINT
+              - column:
+                  name: product_sku
+                  type: VARCHAR(255)
+              - column:
+                  name: warehouse_id
+                  type: BIGINT
+              - column:
+                  name: warehouse_name
+                  type: VARCHAR(255)
+              - column:
+                  name: type
+                  type: VARCHAR(50)
+              - column:
+                  name: quantity_change
+                  type: INT
+              - column:
+                  name: resulting_quantity
+                  type: INT
+              - column:
+                  name: transaction_date
+                  type: TIMESTAMP
+

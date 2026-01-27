@@ -1,0 +1,52 @@
+spring:
+  application:
+    name: product-service
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:postgres-product}:${POSTGRES_PORT:5432}/${POSTGRES_DB:productdb}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  cloud:
+    stream:
+      defaultBinder: kafka
+
+      bindings:
+        stockEvents-out-0:
+          destination: ${app.kafka.topics.stock-events}
+          content-type: application/json
+
+        productCreationEvents-out-0:
+          destination: ${app.kafka.topics.product-creation-events}
+          content-type: application/json
+
+        productUpdateEvents-out-0:
+          destination: ${app.kafka.topics.product-update-events}
+          content-type: application/json
+
+        purchaseOrderEvents-in-0:
+          destination: ${app.kafka.topics.purchase-order-events}
+          content-type: application/json
+          group: purchase-event-consumer-group
+
+      kafka:
+        binder:
+          brokers: ${KAFKA_HOST:kafka}:${KAFKA_PORT:9092}
+
+app:
+  kafka:
+    topics:
+      product-creation-events: product-creation-events
+      product-update-events: product-update-events
+      purchase-order-events: purchase-order-events
+      stock-events: stock-events
+
+server:
+  port: 3001

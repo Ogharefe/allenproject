@@ -1,0 +1,79 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-sales-tables
+      author: allen
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: sales_orders
+      changes:
+        - createTable:
+            tableName: sales_orders
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: order_date
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: UUID
+              - column:
+                  name: total_amount
+                  type: DECIMAL(19, 2)
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment
+                  type: JSONB
+
+        - createTable:
+            tableName: sales_order_items
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_name
+                  type: VARCHAR(255)
+              - column:
+                  name: quantity
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: DOUBLE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sales_order_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableName: sales_order_items
+            baseColumnNames: sales_order_id
+            referencedTableName: sales_orders
+            referencedColumnNames: id
+            constraintName: fk_sales_order_items_sales_orders
+            onDelete: CASCADE

@@ -1,0 +1,38 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        # product-service (local ports)
+        - id: product-products
+          uri: http://localhost:3005
+          predicates:
+            - Path=/api/products/**
+        - id: product-stocks
+          uri: http://localhost:3005
+          predicates:
+            - Path=/api/stocks/**
+        - id: product-warehouses
+          uri: http://localhost:3005
+          predicates:
+            - Path=/api/warehouses/**
+
+        # purchase-service
+        - id: purchase-orders
+          uri: http://localhost:3003
+          predicates:
+            - Path=/api/purchaseorders/**
+        - id: purchase-suppliers
+          uri: http://localhost:3003
+          predicates:
+            - Path=/api/suppliers/**
+
+        # sales-service
+        - id: sales
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/sales/**

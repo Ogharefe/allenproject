@@ -1,0 +1,268 @@
+
+networks:
+  microservices-net:
+    driver: bridge
+
+volumes:
+  pgdata-product:
+  pgdata-purchase:
+
+services:
+
+  # -------------------
+  # Zookeeper
+  # -------------------
+  zookeeper:
+    image: confluentinc/cp-zookeeper:6.1.1
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    healthcheck:
+      test: ["CMD-SHELL", "exit 0"]
+      interval: 10s
+      timeout: 5s
+      retries: 1
+    networks:
+      - microservices-net
+
+  # -------------------
+  # Kafka
+  # -------------------
+  kafka:
+    image: confluentinc/cp-kafka:6.1.1
+    container_name: kafka
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"      # Pour les conteneurs internes
+      - "29092:29092"    # Pour appli locale
+    networks:
+      - microservices-net
+
+  # -------------------
+  # Postgres Product
+  # -------------------
+  postgres-product:
+    image: postgres:16
+    container_name: postgres-product
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: productdb
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata-product:/var/lib/postgresql/data
+      - ./postgres/init-productdb.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d productdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - microservices-net
+
+  # -------------------
+  # Postgres Purchase
+  # -------------------
+  postgres-purchase:
+    image: postgres:16
+    container_name: postgres-purchase
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: purchasedb
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata-purchase:/var/lib/postgresql/data
+      - ./postgres/init-purchasedb.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d purchasedb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - microservices-net
+
+
+  # -------------------
+  # Postgres sales
+  # -------------------
+  postgres-sales:
+    image: postgres:16
+    container_name: postgres-sales
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=sales_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+    volumes:
+      - pgdata-sales:/var/lib/postgresql/data
+      - ./postgres/init-salesdb.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d salesdb" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - microservices-net
+
+
+  # -------------------
+  # Product Service
+  # -------------------
+  product-service:
+    image: docker-product-service
+    container_name: product-service
+    depends_on:
+      postgres-product:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      zookeeper:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      POSTGRES_HOST: postgres-product
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: productdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+    build:
+      context: ../product-service
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    networks:
+      - microservices-net
+
+  # -------------------
+  # Purchase Service
+  # -------------------
+  purchase-service:
+    image: docker-purchase-service
+    container_name: purchase-service
+    depends_on:
+      postgres-purchase:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      zookeeper:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      POSTGRES_HOST: postgres-purchase
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: purchasedb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+    build:
+      context: ../purchase-service
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    networks:
+      - microservices-net
+
+  # -------------------
+  # sales Service
+  # -------------------
+  sales-service:
+    container_name: sales-service
+    depends_on:
+      postgres-purchase:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+      zookeeper:
+        condition: service_healthy
+    ports:
+      - "8083:8083"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      POSTGRES_HOST: postgres-sales
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: salesdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+      SPRING_CLOUD_STREAM_KAFKA_BINDER_BROKERS: kafka:9092
+    build:
+      context: ../sales-service
+      dockerfile: Dockerfile
+    networks:
+      - microservices-net
+
+  # -------------------
+  # Gateway Service
+  # -------------------
+  gateway-service:
+    image: docker-gateway-service
+    container_name: gateway-service
+    depends_on:
+      product-service:
+        condition: service_started
+      purchase-service:
+        condition: service_started
+      sales-service:
+        condition: service_started
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    build:
+      context: ../gateway-service
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - microservices-net
+  # -------------------
+  # pgAdmin
+  # -------------------
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80"
+    networks:
+      - microservices-net
+
+  akhq:
+    image: tchiotludo/akhq:latest
+    container_name: akhq
+    ports:
+      - "8088:8080"
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            docker-kafka-cluster:
+              properties:
+                bootstrap.servers: "kafka:9092"
+    depends_on:
+      - kafka
+    networks:
+      - microservices-net

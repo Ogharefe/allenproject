@@ -1,0 +1,54 @@
+spring:
+  application:
+    name: purchase-service
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:purchasedb}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  cloud:
+    stream:
+      defaultBinder: kafka
+
+      bindings:
+        purchaseOrderEvents-out-0:
+          destination: ${app.kafka.topics.purchase-order-events}
+          content-type: application/json
+
+        productCreationEvents-in-0:
+          destination: ${app.kafka.topics.product-creation-events}
+          content-type: application/json
+          group: product-event-consumer-group
+
+        stockUpdateEventsConsumer-in-0:
+          destination: ${app.kafka.topics.stock-update-events}
+          content-type: application/json
+          group: stock-events-consumer-group
+
+      kafka:
+        binder:
+          brokers: localhost:29092
+          autoCreateTopics: true
+          replicationFactor: 1
+
+app:
+  kafka:
+    topics:
+      purchase-order-events: purchase-order-events
+      product-creation-events: product-creation-events
+      stock-update-events: stock-update-events
+    partitions: 1
+    replicas: 1
+
+server:
+  port: 3003

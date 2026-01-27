@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0740cdec-2366-4d18-bf4e-c91737d9fd19" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../docker/postgres/init-productdb.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docker/postgres/init-purchasedb.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../docker/postgres/init-saledb.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/constants/PurchaseOrderStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/enums/OrderStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/enums/PaymentMethod.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/enums/ProductEventType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/enums/ReservationStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/enums/SaleStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/event/EventMetadata.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/event/ProductEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/event/PurchaseOrderEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/event/PurchaseOrderLineEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/event/StockReservationResultEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/event/StockUpdateBatchCommandEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/event/StockUpdateCommandEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/event/StockUpdateEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/usecase/StockEventPublisherUsecase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/adapters/StockEventPublisherAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/web/kafka/PurchaseOrderEventConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-docker.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-local.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wait-for-postgres-and-kafka.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/AppMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/appMappers/AppItemSupplierMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/appMappers/AppPurchaseOrderMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/dtos/ItemSupplierDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/dtos/PurchaseOrderDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/dtos/PurchaseOrderLineDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/publisherUsecase/PurchaseOrderEventUsecase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/service/PurchaseOrderLineService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/service/PurchaseOrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/usecase/ItemSupplierUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/usecase/PurchaseOrderLineUsecase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/applications/usecase/PurchaseOrderUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/domain/model/ItemSupplier.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/domain/model/PurchaseOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/domain/model/PurchaseOrderLine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/domain/port/ItemSupplierRepositoryPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/domain/port/PurchaseOrderLineReposPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/domain/port/PurchaseOrderRepositoryPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/adapters/ItemSupplierImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/adapters/PurchaseOrderImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/adapters/PurchaseOrderLineImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/adapters/publisher/publisherAdapterImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/entity/ItemSupplierEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/entity/PurchaseOrderEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/entity/PurchaseOrderLineEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/jpaRepository/ItemSupplierRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/jpaRepository/PurchaseOrderLineRepos.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/jpaRepository/PurchaseOrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/mappers/ItemSupplierMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/mappers/PurchaseOrderLineMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/persistence/mappers/PurchaseOrderMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/web/kafka/StockEventConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/web/rest/ItemSupplierController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/infrastructure/web/rest/PurchaseOrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/resources/application-docker.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/src/main/resources/application-local.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../purchase-service/wait-for-postgres-and-kafka.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/application/appMappers/AppMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/application/requestDataDto/PaymentRequesttDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/application/requestDataDto/SaleItemRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/application/requestDataDto/SaleRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/application/service/ProductSnapshotService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/application/service/SaleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/application/usecase/ProductSnapshotUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/application/usecase/SaleUseCase.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/domain/model/LineResult.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/domain/model/Payment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/domain/model/ProductSnapshot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/domain/model/Sale.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/domain/model/SaleItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/domain/port/ProductSnapshotPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/domain/port/SaleRepositoryPort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/adapter/ProductSnapshotJpaAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/entity/PaymentEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/entity/ProductSnapshotEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/entity/SaleEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/entity/SaleItemEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/japRepository/PaymentEntityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/japRepository/ProductSnapshotRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/japRepository/SalesEntityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/japRepository/SalesItemEntityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/mapper/ProductSnapshotMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/persistence/mapper/SaleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/web/kafka/ProductCreatedConsumerConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/java/com/allen/sales/infrastructure/web/rest/SaleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/resources/application-local.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/resources/db/changelog/changes/001-initial-schema.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/resources/db/changelog/changes/002-create-payment-table.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/src/main/resources/db/changelog/changes/003-product_snapshots-table.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../sales-service/wait-for-postgres-and-kafka.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__ch_qos_logback_logback_classic_1_4_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__ch_qos_logback_logback_core_1_4_14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_classmate_1_6_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_15_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_github_luben_zstd_jni_1_5_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_google_code_findbugs_jsr305_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_jayway_jsonpath_json_path_2_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_opencsv_opencsv_5_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_sun_istack_istack_commons_runtime_4_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_vaadin_external_google_android_json_0_0_20131108_vaadin1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_zaxxer_HikariCP_5_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__io_micrometer_micrometer_commons_1_12_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__io_micrometer_micrometer_observation_1_12_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__io_smallrye_jandex_3_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_2_1_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_2_1_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__jakarta_inject_jakarta_inject_api_2_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__jakarta_persistence_jakarta_persistence_api_3_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__jakarta_transaction_jakarta_transaction_api_2_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_4_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_14_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_14_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__net_minidev_accessors_smart_2_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__net_minidev_json_smart_2_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_antlr_antlr4_runtime_4_13_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_commons_commons_collections4_4_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_commons_commons_lang3_3_13_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_commons_commons_text_1_10_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_kafka_kafka_clients_3_6_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_logging_log4j_log4j_api_2_21_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_logging_log4j_log4j_to_slf4j_2_21_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_10_1_20.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_10_1_20.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_10_1_20.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apiguardian_apiguardian_api_1_1_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_assertj_assertj_core_3_24_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_awaitility_awaitility_4_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_checkerframework_checker_qual_3_31_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_eclipse_angus_angus_activation_2_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_glassfish_jaxb_jaxb_core_4_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_glassfish_jaxb_jaxb_runtime_4_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_glassfish_jaxb_txw2_4_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_hamcrest_hamcrest_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_hibernate_common_hibernate_commons_annotations_6_0_6_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_hibernate_orm_hibernate_core_6_4_4_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_jboss_logging_jboss_logging_3_5_3_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_5_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_api_5_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_engine_5_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_junit_jupiter_junit_jupiter_params_5_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_junit_platform_junit_platform_commons_1_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_junit_platform_junit_platform_engine_1_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_liquibase_liquibase_core_4_24_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_lz4_lz4_java_1_8_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_mapstruct_mapstruct_1_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_mapstruct_mapstruct_processor_1_6_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_mockito_mockito_core_5_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_mockito_mockito_junit_jupiter_5_7_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_objenesis_objenesis_3_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_opentest4j_opentest4j_1_3_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_ow2_asm_asm_9_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_postgresql_postgresql_42_6_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_projectlombok_lombok_1_18_32.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_skyscreamer_jsonassert_1_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_jul_to_slf4j_2_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_slf4j_api_2_0_13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_logging_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_test_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_data_spring_data_commons_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_data_spring_data_jpa_3_2_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_kafka_spring_kafka_3_1_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_retry_spring_retry_2_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_aop_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_aspects_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_beans_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_context_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_core_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_expression_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_jcl_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_jdbc_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_messaging_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_orm_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_test_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_tx_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_web_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_springframework_spring_webmvc_6_1_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_xerial_snappy_snappy_java_1_1_10_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_9_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_yaml_snakeyaml_2_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../docker/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product-service.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/ProductServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/ProductServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/constants/StockUpdateType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../event-contracts/src/main/java/com/allen/event_contracts/enums/StockUpdateType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/dto/StockDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/dto/StockDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/dto/StockTransactionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/dto/StockTransactionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/dto/StockUpdateCommandDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/dto/StockUpdateCommandDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/facade/StockTransactionFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/facade/StockTransactionFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/service/StockService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/service/StockService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/service/StockTransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/service/StockTransactionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/service/WarehouseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/service/WarehouseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/usecase/StockTransactionDomainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/usecase/StockTransactionDomainService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/usecase/StockTransactionUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/usecase/StockTransactionUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/application/usecase/StockUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/application/usecase/StockUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/model/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/model/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/model/StockTransaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/model/StockTransaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/model/StockUpdateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/model/StockUpdateCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/port/StockRepositoryPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/port/StockRepositoryPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/port/StockTransactionRepositoryPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/domain/port/StockTransactionRepositoryPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/adapters/StockRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/adapters/StockRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/entity/ProductEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/entity/ProductEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/entity/StockEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/entity/StockEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/entity/StockTransactionEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/entity/StockTransactionEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/entity/WarehouseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/entity/WarehouseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/mapper/StockMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/persistence/mapper/StockMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/web/rest/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/allen/product/infrastructure/web/rest/StockController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/ProductServiceApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/ProductServiceApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/applicationMapper/AppProductMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/applicationMapper/AppProductMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/applicationMapper/AppStockMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/applicationMapper/AppStockMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/constants/StockUpdateType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/dto/StockDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/dto/StockDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/dto/StockTransactionDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/dto/StockTransactionDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/dto/StockUpdateCommandDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/dto/StockUpdateCommandDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/facade/StockTransactionFacade.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/facade/StockTransactionFacade.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/StockService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/StockService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/StockService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/StockService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/StockTransactionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/StockTransactionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/WarehouseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/service/WarehouseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/usecase/StockTransactionDomainService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/usecase/StockTransactionDomainService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/usecase/StockTransactionUseCase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/usecase/StockTransactionUseCase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/application/usecase/StockUseCase.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/application/usecase/StockUseCase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/domain/model/Stock.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/domain/model/Stock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/domain/model/StockTransaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/domain/model/StockTransaction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/domain/model/StockUpdateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/domain/model/StockUpdateCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/adapters/StockRepositoryImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/adapters/StockRepositoryImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/ProductEntity$ProductEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/ProductEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/ProductEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/StockEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/StockEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/StockTransactionEntity$StockTransactionEntityBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/StockTransactionEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/StockTransactionEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/WarehouseEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/entity/WarehouseEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/mapper/ProductMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/mapper/ProductMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/mapper/StockMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/mapper/StockMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/mapper/StockMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/mapper/StockMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/mapper/StockTransactionMapperImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/persistence/mapper/StockTransactionMapperImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/web/rest/StockController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/allen/product/infrastructure/web/rest/StockController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/changelog/db.changelog-master.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/application/applicationMapper/AppProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/application/applicationMapper/AppProductMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/application/applicationMapper/AppStockMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/application/applicationMapper/AppStockMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/application/applicationMapper/AppWarehouseMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/application/applicationMapper/AppWarehouseMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/infrastructure/persistence/mapper/ProductMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/infrastructure/persistence/mapper/ProductMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/infrastructure/persistence/mapper/StockMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/infrastructure/persistence/mapper/StockMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/infrastructure/persistence/mapper/StockTransactionMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/infrastructure/persistence/mapper/StockTransactionMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/infrastructure/persistence/mapper/WarehouseMapperImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/target/generated-sources/annotations/com/allen/product/infrastructure/persistence/mapper/WarehouseMapperImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/product-service-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/product-service-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/product-service-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/product-service-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wait-for-postgres.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../purchase-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../purchase-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../purchase-service/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../purchase-service/src/main/java/com/allen/purchase/PurchaseServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../purchase-service/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../purchase-service/src/main/resources/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../purchase-service/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../purchase-service/target/classes/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../purchase-service/target/classes/com/allen/purchase/PurchaseServiceApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../purchase-service/target/classes/db/changelog/db.changelog-master.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sales-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../sales-service/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sales-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sales-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sales-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../sales-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sales-service/src/main/resources/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../sales-service/src/main/resources/db/changelog/db.changelog-master.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sales-service/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../sales-service/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sales-service/target/classes/db/changelog/db.changelog-master.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../sales-service/target/classes/db/changelog/db.changelog-master.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 1
+}]]></component>
+  <component name="ProjectId" id="38jvx1XV6F2RHGmCYwAwgFpKzaz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "productservice/feature",
+    "kotlin-language-version-configured": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0740cdec-2366-4d18-bf4e-c91737d9fd19" name="Changes" comment="" />
+      <created>1769326040963</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1769326040963</updated>
+    </task>
+    <servers />
+  </component>
+</project>

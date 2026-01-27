@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: product-service
+
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:productdb}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:admin}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  cloud:
+    stream:
+      defaultBinder: kafka
+
+      bindings:
+        # Output binding for product-creation-events (publish)
+        stockEvents-out-0:
+          destination: ${app.kafka.topics.stock-events}
+          content-type: application/json
+
+        # Output binding for product-creation-events (publish)
+        productCreationEvents-out-0:
+          destination: ${app.kafka.topics.product-creation-events}
+          content-type: application/json
+
+        # Output binding for product-update-events (publish)
+        productUpdateEvents-out-0:
+          destination: ${app.kafka.topics.product-update-events}
+          content-type: application/json
+
+        # Input binding for purchase order events (consume)
+        purchaseOrderEvents-in-0:
+          destination: ${app.kafka.topics.purchase-order-events}
+          content-type: application/json
+          group: purchase-event-consumer-group  # consumer group id
+
+    kafka:
+      binder:
+        brokers: localhost:29092
+        autoCreateTopics: true
+        replicationFactor: 1
+
+app:
+  kafka:
+    topics:
+      product-creation-events: product-creation-events
+      product-update-events: product-update-events
+      purchase-order-events: purchase-order-events
+      stock-events: stock-events
+
+server:
+  port: 3005

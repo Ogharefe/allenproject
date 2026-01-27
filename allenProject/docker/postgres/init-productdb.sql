@@ -1,0 +1,2 @@
+--CREATE DATABASE productdb;
+CREATE SCHEMA IF NOT EXISTS productdb;
