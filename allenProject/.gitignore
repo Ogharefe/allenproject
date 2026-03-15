@@ -1,25 +1,17 @@
-# Ignore VS Code settings folder
+# IDE
+.idea/
 .vscode/
-# Ignore absolute directory
-absolute/
-# Ignore dev directory
-dev/
-# Ignore compiled class files
+*.iml
+
+# Maven / Java
+**/target/
+**/*.jar
+**/*.war
 *.class
 
-# Ignore build output directories
-/target/
+# Build directories
 /bin/
 /out/
-
-# Maven
-target/
-*.jar
-*.war
-
-# IntelliJ
-.idea/
-*.iml
 
 # OS
 .DS_Store
@@ -27,3 +19,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Misc
+absolute/
+dev/

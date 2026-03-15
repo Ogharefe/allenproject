@@ -2,6 +2,9 @@ spring:
   application:
     name: product-service
 
+  kafka:
+    bootstrap-servers: ${KAFKA_HOST:kafka}:${KAFKA_PORT:9092}
+
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST:postgres-product}:${POSTGRES_PORT:5432}/${POSTGRES_DB:productdb}
     username: ${POSTGRES_USER:postgres}

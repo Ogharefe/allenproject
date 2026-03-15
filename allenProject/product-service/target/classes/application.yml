@@ -1,9 +1,0 @@
-spring:
-  profiles:
-    active: local
-
-  cloud:
-    stream:
-      kafka:
-        binder:
-          brokers: localhost:29092
