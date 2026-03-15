@@ -1,0 +1,29 @@
+# Ignore VS Code settings folder
+.vscode/
+# Ignore absolute directory
+absolute/
+# Ignore dev directory
+dev/
+# Ignore compiled class files
+*.class
+
+# Ignore build output directories
+/target/
+/bin/
+/out/
+
+# Maven
+target/
+*.jar
+*.war
+
+# IntelliJ
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
