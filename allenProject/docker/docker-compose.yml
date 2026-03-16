@@ -105,7 +105,7 @@ services:
     image: postgres:16
     container_name: postgres-sales
     ports:
-      - "5433:5432"
+      - "5435:5432"
     environment:
       - POSTGRES_DB=sales_db
       - POSTGRES_USER=postgres
@@ -190,7 +190,7 @@ services:
   sales-service:
     container_name: sales-service
     depends_on:
-      postgres-purchase:
+      postgres-sales:
         condition: service_healthy
       kafka:
         condition: service_started
