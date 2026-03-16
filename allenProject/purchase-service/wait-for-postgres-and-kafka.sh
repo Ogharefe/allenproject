@@ -20,4 +20,4 @@ done
 echo "Kafka is up."
 
 # Start the Spring Boot app
-exec java -jar /app/purchase-service-0.0.1-SNAPSHOT.jar
+exec java -jar /app/$5

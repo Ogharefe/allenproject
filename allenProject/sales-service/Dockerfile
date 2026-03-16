@@ -12,6 +12,7 @@ COPY wait-for-postgres-and-kafka.sh wait-for-postgres-and-kafka.sh
 
 # Make the script executable
 RUN chmod +x wait-for-postgres-and-kafka.sh
+RUN sed -i 's/\r$//' wait-for-postgres-and-kafka.sh
 
 # Install netcat (nc) which is needed for the wait script
 RUN apk add --no-cache netcat-openbsd
@@ -20,4 +21,4 @@ RUN apk add --no-cache netcat-openbsd
 EXPOSE 8083
 
 # Run the jar file
-ENTRYPOINT ["./wait-for-postgres-and-kafka.sh", "postgres-sales", "java", "-jar", "app.jar"]
+ENTRYPOINT ["./wait-for-postgres-and-kafka.sh", "postgres-sales", "5432", "kafka", "9092", "app.jar"]
