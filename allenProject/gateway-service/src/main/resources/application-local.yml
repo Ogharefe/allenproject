@@ -9,30 +9,31 @@ spring:
       routes:
         # product-service (local ports)
         - id: product-products
-          uri: http://localhost:3005
+          uri: http://localhost:6001
           predicates:
             - Path=/api/products/**
         - id: product-stocks
-          uri: http://localhost:3005
+          uri: http://localhost:6001
           predicates:
             - Path=/api/stocks/**
         - id: product-warehouses
-          uri: http://localhost:3005
+          uri: http://localhost:6001
           predicates:
             - Path=/api/warehouses/**
 
         # purchase-service
         - id: purchase-orders
-          uri: http://localhost:3003
+          uri: http://localhost:6002
           predicates:
             - Path=/api/purchaseorders/**
+
         - id: purchase-suppliers
-          uri: http://localhost:3003
+          uri: http://localhost:6002
           predicates:
             - Path=/api/suppliers/**
 
         # sales-service
         - id: sales
-          uri: http://localhost:8083
+          uri: http://localhost:6003
           predicates:
             - Path=/api/v1/sales/**

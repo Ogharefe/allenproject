@@ -7,32 +7,32 @@ spring:
   cloud:
     gateway:
       routes:
-        # product-service inside docker network
+        # product-service on host
         - id: product-products
-          uri: http://product-service:3001
+          uri: http://host.docker.internal:3005
           predicates:
             - Path=/api/products/**
         - id: product-stocks
-          uri: http://product-service:3001
+          uri: http://host.docker.internal:3005
           predicates:
             - Path=/api/stocks/**
         - id: product-warehouses
-          uri: http://product-service:3001
+          uri: http://host.docker.internal:3005
           predicates:
             - Path=/api/warehouses/**
 
         # purchase-service
         - id: purchase-orders
-          uri: http://purchase-service:3002
+          uri: http://host.docker.internal:3003
           predicates:
             - Path=/api/purchaseorders/**
         - id: purchase-suppliers
-          uri: http://purchase-service:3002
+          uri: http://host.docker.internal:3003
           predicates:
             - Path=/api/suppliers/**
 
         # sales-service
         - id: sales
-          uri: http://sales-service:8083
+          uri: http://host.docker.internal:8083
           predicates:
             - Path=/api/v1/sales/**

@@ -150,6 +150,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
+      - "5005:5005"
     networks:
       - microservices-net
 
@@ -181,6 +182,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3002:3002"
+      - "5006:5006"
     networks:
       - microservices-net
 
@@ -197,7 +199,8 @@ services:
       zookeeper:
         condition: service_healthy
     ports:
-      - "8083:8083"
+      - "3003:3003"
+      - "5007:5007"
     environment:
       SPRING_PROFILES_ACTIVE: docker
       POSTGRES_HOST: postgres-sales
@@ -233,7 +236,8 @@ services:
       context: ../gateway-service
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "3004:3004"
+      - "5008:5008"
     networks:
       - microservices-net
   # -------------------

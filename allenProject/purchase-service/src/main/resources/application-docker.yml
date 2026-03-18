@@ -38,6 +38,11 @@ spring:
           content-type: application/json
           group: stock-events-consumer-group
 
+        productEventsConsumer-in-0:
+          destination: ${app.kafka.topics.product-update-events}
+          content-type: application/json
+          group: product-events-consumer-group
+
       kafka:
         binder:
           brokers: ${KAFKA_HOST:kafka}:${KAFKA_PORT:9092}

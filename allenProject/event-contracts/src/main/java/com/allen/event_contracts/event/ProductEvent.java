@@ -9,6 +9,6 @@ public record ProductEvent(
         String name,
         String description,
         double price,
-        ProductEventType type
-
+        ProductEventType type,
+        Long warehouseId
 ) {}

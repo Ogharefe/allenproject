@@ -1,7 +1,7 @@
 package com.allen.product.application.service;
 
 import com.allen.event_contracts.enums.StockUpdateType;
-import com.allen.event_contracts.event.StockUpdateEvent;
+import com.allen.event_contracts.event.StockUpdateCommand;
 import com.allen.product.application.usecase.StockTransactionUseCase;
 import com.allen.product.application.usecase.StockUseCase;
 import com.allen.product.domain.model.*;
@@ -35,76 +35,20 @@ public class StockService implements StockUseCase {
         this.stockRepositoryPort = stockRepositoryPort;
         this.warehouseRepositoryPort = warehouseRepositoryPort;
         this.productRepositoryPort = productRepositoryPort;
-
         this.streamBridge = streamBridge;
-    }
-    @Override
-    public StockStatus trackStock(Long productId, Long warehouseId, int lowStockThreshold) {
-
-        Stock stock = findByProductIdAndWarehouseId(productId, warehouseId)
-                .orElseThrow(() -> new RuntimeException("Stock not found"));
-        int availableQty = stock.getAvailableQuantity();
-        boolean isLowStock = stock.isLowStock(lowStockThreshold);
-        if (isLowStock) {
-            logger.warn("Low stock detected for product {} in warehouse {}: available={}",
-                    productId, warehouseId, availableQty);
-        }
-        return new StockStatus(stock.productId(), stock.warehouseId(), availableQty, isLowStock);
     }
 
     @Override
     public Stock createOrUpdateStock(StockUpdateCommand command) {
-
-        Product product = productRepositoryPort.findByProductId(command.productId())
-                .orElseThrow(() -> new RuntimeException("Product not found !"));
-        double price = product.price();
         Stock updatedStock = stockRepositoryPort.findByProductAndWarehouse(command.productId(), command.warehouseId())
                 .map(existingStock -> updateExistingStock(existingStock, command))
                 .orElseGet(() -> createNewStock(command));
 
-        // Record the transaction directly through the service
+        // Record the transaction
         transactionService.recordTransaction(updatedStock, command.updateType(), command.quantityChange());
 
-        // 🔹 Publish event after save
-           StockUpdateEvent event = new StockUpdateEvent(
-                updatedStock.stockId(),
-                updatedStock.productId(),
-                price,
-                updatedStock.warehouseId(),
-                updatedStock.warehouseName(),
-                updatedStock.quantityOnHand(),
-                updatedStock.quantityReserved(),
-                updatedStock.lastUpdated(),
-                updatedStock.quantityChange()
-        );
-        streamBridge.send("stock-events",event);
         return updatedStock;
     }
-
-    private Stock createNewStock(StockUpdateCommand command) {
-        // Fetch warehouse info only
-        Warehouse warehouse = warehouseRepositoryPort.findByWarehouseId(command.warehouseId())
-                .orElseThrow(() -> new IllegalArgumentException("Warehouse not found: " + command.warehouseId()));
-        Product product = productRepositoryPort.findByProductId(command.productId())
-                .orElseThrow(() -> new IllegalArgumentException("product not found: " + command.warehouseId()));
-
-        // Start from initial quantity 0
-        int newQuantity = calculateNewQuantity(0, command.quantityChange(), command.updateType());
-
-        Stock newStock = new Stock(
-                null,
-                product.productId(),
-                warehouse.warehouseId(),
-                warehouse.name(),
-                newQuantity,
-                0,
-                LocalDate.now(),
-                command.quantityChange()
-        );
-
-        return stockRepositoryPort.saveStock(newStock);
-    }
-
 
     private Stock updateExistingStock(Stock existingStock, StockUpdateCommand command) {
         int currentQuantity = existingStock.quantityOnHand();
@@ -122,12 +66,46 @@ public class StockService implements StockUseCase {
                 existingStock.warehouseName(),
                 newQuantity,
                 existingStock.quantityReserved(),
-                LocalDate.now(), // better to refresh timestamp
+                LocalDate.now(),
                 command.quantityChange()
         );
-        Stock savedStock = stockRepositoryPort.saveStock(newStock);
-        return savedStock;
+        return stockRepositoryPort.saveStock(newStock);
     }
+
+    private Stock createNewStock(StockUpdateCommand command) {
+        var warehouse = warehouseRepositoryPort.findByWarehouseId(command.warehouseId())
+                .orElseThrow(() -> new IllegalArgumentException("Warehouse not found: " + command.warehouseId()));
+
+        int newQuantity = calculateNewQuantity(0, command.quantityChange(), command.updateType());
+
+        Stock newStock = new Stock(
+                null,
+                command.productId(),
+                warehouse.warehouseId(),
+                warehouse.name(),
+                newQuantity,
+                0,
+                LocalDate.now(),
+                command.quantityChange()
+        );
+
+        return stockRepositoryPort.saveStock(newStock);
+    }
+
+    @Override
+    public StockStatus trackStock(Long productId, Long warehouseId, int lowStockThreshold) {
+
+        Stock stock = findByProductIdAndWarehouseId(productId, warehouseId)
+                .orElseThrow(() -> new RuntimeException("Stock not found"));
+        int availableQty = stock.getAvailableQuantity();
+        boolean isLowStock = stock.isLowStock(lowStockThreshold);
+        if (isLowStock) {
+            logger.warn("Low stock detected for product {} in warehouse {}: available={}",
+                    productId, warehouseId, availableQty);
+        }
+        return new StockStatus(stock.productId(), stock.warehouseId(), availableQty, isLowStock);
+    }
+
 
     private void validateStockInputs(Stock stock, Long warehouseId) {
         Objects.requireNonNull(stock, "Stock cannot be null");

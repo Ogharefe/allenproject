@@ -51,4 +51,4 @@ app:
     replicas: 1
 
 server:
-  port: 3003
+  port: 6002

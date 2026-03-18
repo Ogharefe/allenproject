@@ -55,4 +55,4 @@ app:
       stock-events: stock-events
 
 server:
-  port: 3005
+  port: 6001

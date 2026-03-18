@@ -65,7 +65,8 @@ public class ProductService implements ProductUseCase {
                 saved.name(),
                 saved.description(),
                 saved.price(),
-                ProductEventType.CREATED
+                ProductEventType.CREATED,
+                null
               );
         boolean sent = streamBridge.send("productCreationEvents-out-0", event);
         if (sent) {
@@ -109,7 +110,8 @@ public class ProductService implements ProductUseCase {
                 saved.name(),
                 saved.description(),
                 saved.price(),
-                ProductEventType.UPDATED
+                ProductEventType.UPDATED,
+                null
         );
         boolean sent = streamBridge.send("productUpdateEvents-out-0", event);
         if (sent) {

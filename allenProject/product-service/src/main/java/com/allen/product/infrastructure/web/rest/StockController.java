@@ -1,45 +1,47 @@
 package com.allen.product.infrastructure.web.rest;
 
-import com.allen.product.application.applicationMapper.AppStockMapper;
-import com.allen.product.application.dto.StockDTO;
+import com.allen.event_contracts.event.StockUpdateCommand;
+import com.allen.event_contracts.event.StockUpdateCommandEvent;
 import com.allen.product.application.usecase.StockUseCase;
 import com.allen.product.domain.model.Stock;
-import com.allen.product.domain.model.StockUpdateCommand;
+import com.allen.product.application.dto.StockDTO;
+import com.allen.product.application.applicationMapper.AppStockMapper;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/stocks")
 public class StockController {
+
     private final StockUseCase stockUseCase;
     private final AppStockMapper mapper;
+    private final StreamBridge streamBridge;
 
-    public StockController(StockUseCase stockUseCase, AppStockMapper mapper) {
+    private static final Logger log = LoggerFactory.getLogger(StockController.class);
+
+    public StockController(StockUseCase stockUseCase, AppStockMapper mapper, StreamBridge streamBridge) {
         this.stockUseCase = stockUseCase;
         this.mapper = mapper;
+        this.streamBridge = streamBridge;
     }
-    @PostMapping
-    public ResponseEntity<StockDTO> createOrUpdateStock(@RequestBody StockUpdateCommand command) {
-        Stock stock = stockUseCase.createOrUpdateStock(command);
-        StockDTO stockDTO = mapper.stockDomainToDTO(stock);
-        return new ResponseEntity<>(stockDTO, HttpStatus.CREATED);
 
-    }
     @GetMapping
     public ResponseEntity<List<StockDTO>> getStockList() {
-        List<StockDTO> stockDTOs = stockUseCase.getStockList().stream()
-                .map(stock -> mapper.stockDomainToDTO(stock))
+        List<Stock> stocks = stockUseCase.getStockList();
+        log.info("Retrieved {} stocks", stocks.size());
+        List<StockDTO> stockDTOs = stocks.stream()
+                .map(mapper::stockDomainToDTO)
                 .toList();
-        if (stockDTOs.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(stockDTOs);
-        }
+        return ResponseEntity.ok(stockDTOs);
     }
+
     @PostMapping("/{stockId}/reserve")
     public ResponseEntity<StockDTO> reserveStock(
             @PathVariable Long stockId,
@@ -48,7 +50,8 @@ public class StockController {
         Stock reserved = stockUseCase.reserveStock(quantityToReserve,stockId);
         return ResponseEntity.ok(mapper.stockDomainToDTO(reserved));
     }
-    @DeleteMapping
+
+    @DeleteMapping("/{stockId}")
     public  ResponseEntity<Void> deletStock(@PathVariable Long stockId){
 
         stockUseCase.deletStock(stockId);

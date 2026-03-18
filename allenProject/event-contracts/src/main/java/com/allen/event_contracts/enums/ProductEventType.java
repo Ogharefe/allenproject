@@ -5,5 +5,6 @@ public enum ProductEventType {
     UPDATED,
     DELETED,
     PRICE_CHANGED,
-    STOCK_INITIALIZED
+    STOCK_INITIALIZED,
+    LOW_STOCK
 }

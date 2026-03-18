@@ -19,6 +19,7 @@ RUN apk add --no-cache netcat-openbsd
 
 # Expose the port the application runs on
 EXPOSE 8083
+EXPOSE 5007
 
 # Run the jar file
 ENTRYPOINT ["./wait-for-postgres-and-kafka.sh", "postgres-sales", "5432", "kafka", "9092", "app.jar"]

@@ -112,6 +112,8 @@
                 <version>3.11.0</version>
                 <configuration>
                     <release>21</release>
+                    <debug>true</debug>
+                    <debuglevel>lines,vars,source</debuglevel>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>

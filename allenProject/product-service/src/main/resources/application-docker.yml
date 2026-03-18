@@ -38,7 +38,6 @@ spring:
           destination: ${app.kafka.topics.purchase-order-events}
           content-type: application/json
           group: purchase-event-consumer-group
-
       kafka:
         binder:
           brokers: ${KAFKA_HOST:kafka}:${KAFKA_PORT:9092}
@@ -50,6 +49,7 @@ app:
       product-update-events: product-update-events
       purchase-order-events: purchase-order-events
       stock-events: stock-events
+      stock-update-command-events: stock-update-command-events
 
 server:
   port: 3001

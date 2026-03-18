@@ -5,6 +5,7 @@ import com.allen.event_contracts.enums.StockUpdateType;
 import com.allen.event_contracts.event.PurchaseOrderEvent;
 import com.allen.event_contracts.event.PurchaseOrderLineEvent;
 import com.allen.event_contracts.event.StockUpdateEvent;
+import com.allen.event_contracts.event.ProductEvent;
 
 import com.allen.purchase.applications.publisherUsecase.PurchaseOrderEventUsecase;
 import com.allen.purchase.applications.usecase.PurchaseOrderUseCase;
@@ -41,24 +42,25 @@ import java.util.function.Supplier;
 
         }
 
-        public void createPurchaseOrderFromStockEvent(StockUpdateEvent stockEvent) {
-            // Build a simple PurchaseOrder based on stock info
+        public void createPurchaseOrderFromProductEvent(ProductEvent productEvent) {
+            // Build a simple PurchaseOrder based on product info for low stock
 
-            double price = stockEvent.price();
-            double totalPrice = price * stockEvent.quantityChange();
-                    PurchaseOrder order = new PurchaseOrder(
+            double price = productEvent.price();
+            int quantityToOrder = 50; // Default quantity to order
+            double totalPrice = price * quantityToOrder;
+            PurchaseOrder order = new PurchaseOrder(
                     null,
-                    1L, // supplierId - maybe default or from stock metadata
+                    1L, // supplierId - default
                     "AutoSupplier",
-                    java.time.LocalDate.now(),
-                    java.time.LocalDate.now().plusDays(7),
+                    LocalDate.now(),
+                    LocalDate.now().plusDays(7),
                     PurchaseOrderStatus.NEW,
                     List.of(new PurchaseOrderLine(
                             null,
-                            stockEvent.productId(),
-                            stockEvent.warehouseId(),
-                            stockEvent.quantityChange(),
-                            price, // default price or fetch from catalog
+                            productEvent.productId(),
+                            productEvent.warehouseId(),
+                            quantityToOrder,
+                            price,
                             totalPrice
                     ))
             );

@@ -19,5 +19,5 @@ while ! nc -z $host2 $port2; do
 done
 echo "Kafka is up."
 
-# Start the Spring Boot app
-exec java -jar /app/$5
+# Start the Spring Boot app with debug options
+exec java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5007 -jar /app/$5
